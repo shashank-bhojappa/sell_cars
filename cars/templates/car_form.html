@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %} Car Form {% endblock %}
+{% block page_content %}
+<div class="container">
+<h2>Car Registration Form</h2>
+
+<form action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <table>
+    {{form.as_table}}
+
+ </table>
+<input class="btn btn-primary" type="submit" value="Submit" />
+</form>
+</div>
+{% endblock %}

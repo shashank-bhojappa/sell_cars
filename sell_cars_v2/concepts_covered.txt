@@ -1,0 +1,10 @@
+1. Custom User Model
+2. Django admin Search/Filter
+3. Login/Logout/Register Users
+4. Models using ForeignKey/ManyManyToField
+5. Search Bar
+6. CRUD(POST,PUT,GET,DELETE) methods
+7. View Restrictions/Authorization using LoginReguired decoreators
+8. Custom User Registraion Form
+9. Form
+10. Pagination

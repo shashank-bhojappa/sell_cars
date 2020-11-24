@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% load static %}
+{% block page_content %}
+<div class="container">
+
+
+<div class="row">
+      <div class="col-md-8">
+
+      <img class="card-img-top" src="{{details.car_image.url}}" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">{{details.car_brand}}</h5>
+          <p class="card-text">Some quick specification for {{details.car_brand}} {{details.car_model}}</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item"><h2>Car Specifications</h2></li>
+        <li class="list-group-item">Car Model: {{details.car_model}}</li>
+        <li class="list-group-item">Car Price: ${{details.price}}/-</li>
+        <li class="list-group-item">Owner Name: {{details.owner_name}}</li>
+        <li class="list-group-item">Email: {{details.email}}</li>
+        <li class="list-group-item">Phone: +91 {{details.phone_number}}</li>
+        <li class="list-group-item">Year of Production: {{details.production_year}}</li>
+        <li class="list-group-item">Miles on Car: {{details.car_miles.miles_on_car}}</li>
+        <li class="list-group-item">Fuel Type: {{details.fuel_type.car_fuel}}</li>
+        <li class="list-group-item">Seating Capacity: {{details.seating_capacity}}</li>
+        <li class="list-group-item">Body Type: {{details.body_type.car_body}}</li>
+        <li class="list-group-item">Transmission Type: {{details.transmission_type.car_transmission}}</li>
+        <li class="list-group-item">Engine Displacement: {{details.engine_displacement}}</li>
+        <li class="list-group-item">Car Color: {{details.car_color}}</li>
+      </ul>
+      </div>
+
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-md-8">
+      <div class="card-body">
+        <h2 class="card-title">CAR DESCRIPTION</h2>
+        <p>{{details.description}}</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <h2>Key Features </h2>
+        <ul class="list-group list-group-flush">
+          {% for all_features in details.key_features.all %}
+              <li class="list-group-item">{{all_features.car_features}}</li>
+          {% endfor %}
+        </ul>
+    </div>
+  </div>
+{% endblock %}

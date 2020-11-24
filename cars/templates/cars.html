@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% load static %}
+{% block page_content %}
+<!DOCTYPE HTML>
+
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<h1>Cars</h1>
+
+							<div class="image main">
+								<img src="images/banner-image-7-1920x500.jpg" class="img-fluid" alt="" />
+							</div>
+
+							<!-- Cars -->
+							<section class="tiles">
+								{% for car in list_all %}
+								<article class="style1">
+									<span class="image">
+										<img class="card-img-top" src="{{car.car_image.url}}">
+									</span>
+									<a href="{% url 'car-details' car.pk %}">
+										<h2>{{ car.car_brand }} {{ car.car_model }}</h2>
+
+										<p><del>$25000</del> <strong>${{car.price}}</strong></p>
+
+										<p>
+		                                	<i class="fa fa-dashboard"></i> {{car.production_year}} &nbsp;&nbsp;&nbsp;&nbsp;
+			                                <i class="fa fa-cube"></i> {{car.engine_displacement}} &nbsp;&nbsp;&nbsp;&nbsp;
+			                                <i class="fa fa-cog"></i> {{car.transmission_type}}
+										</p>
+									</a>
+								</article>
+								{% endfor %}
+
+							</section>
+
+							{% if list_all.has_previous %}
+							<p>
+							<a href="{% url 'all_cars' %}?page={{list_all.previous_page_number}}">Previous Page</a>
+							 |
+							{% endif %}
+							{% if list_all.has_next %}
+							<a href="{% url 'all_cars' %}?page={{list_all.next_page_number}}">Next Page</a>
+							{% endif %}
+							</p>
+
+						</div>
+					</div>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<div class="inner">
+							<section>
+								<ul class="icons">
+									<li><a href="#" class="icon style2 fa-twitter"><span class="label">Twitter</span></a></li>
+									<li><a href="#" class="icon style2 fa-facebook"><span class="label">Facebook</span></a></li>
+									<li><a href="#" class="icon style2 fa-instagram"><span class="label">Instagram</span></a></li>
+									<li><a href="#" class="icon style2 fa-linkedin"><span class="label">LinkedIn</span></a></li>
+								</ul>
+
+								&nbsp;
+							</section>
+
+							<ul class="copyright">
+								<li>Copyright © 2020 Company Name </li>
+								<li>Template by: <a href="https://www.phpjabbers.com/">PHPJabbers.com</a></li>
+							</ul>
+						</div>
+					</footer>
+
+		{% endblock %}

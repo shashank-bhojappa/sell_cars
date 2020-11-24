@@ -1,0 +1,180 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %} Details {% endblock %}
+{% block page_content %}
+<!DOCTYPE HTML>
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<h1>{{details.car_brand}} {{details.car_model}} <span class="pull-right">${{details.price}}/-</span></h1>
+
+							<div class="container-fluid">
+								<div class="row">
+									<div class="col-lg-7">
+										<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+										  <ol class="carousel-indicators">
+										    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+										    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+										    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+										    <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+										    <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
+										  </ol>
+										  <div class="carousel-inner">
+										    <div class="carousel-item active">
+										      <img class="d-block w-100" src="{{details.car_image.url}}" alt="First slide">
+										    </div>
+										  </div>
+										  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+										    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+										    <span class="sr-only">Previous</span>
+										  </a>
+										  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+										    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+										    <span class="sr-only">Next</span>
+										  </a>
+										</div>
+									</div>
+
+									<div class="col-lg-5">
+										<h3>Key Features</h3>
+										<ul class="list-group list-group-flush">
+						          {% for all_features in details.key_features.all %}
+						              <li class="list-group-item">{{all_features.car_features}}</li>
+						          {% endfor %}
+						        </ul>
+									</div>
+								</div>
+							</div>
+
+							<div>
+								{% if user.is_authenticated %}
+									{% if details.owner_name == request.user %}
+										<p><a class="btn btn-primary" href="{% url 'update_details' details.pk %}">Edit</a> | <a class="btn btn-danger" href="{% url 'delete_car' details.pk %}">Delete</a></p>
+									{% endif %}
+								{% endif %}
+							</div>
+
+							<form action="#">
+								<div class="fields">
+									<div class="field quarter">
+					                    <label class="m-n">Type</label>
+
+					                    <input type="text" readonly="" value="Used vehicle">
+					                </div>
+
+					                <div class="field quarter">
+					                    <label class="m-n">Year of Production</label>
+
+					                    <input type="text" readonly="" value="{{details.production_year}}">
+					                </div>
+
+					                <div class="field quarter">
+					                    <label class="m-n">Mileage</label>
+
+					                    <input type="text" readonly="" value="{{details.car_miles.miles_on_car}}">
+					                </div>
+
+					                <div class="field quarter">
+					                    <label class="m-n">Fuel Type</label>
+
+					                    <input type="text" readonly="" value="{{details.fuel_type.car_fuel}}">
+					                </div>
+
+					                <div class="field quarter">
+					                    <label class="m-n">Seating Capacity</label>
+
+					                    <input type="text" readonly="" value="{{details.seating_capacity}}">
+					                </div>
+
+									<div class="field quarter">
+					                    <label class="m-n">Body Type</label>
+
+					                    <input type="text" readonly="" value="{{details.body_type.car_body}}">
+					                </div>
+
+					                <div class="field quarter">
+					                    <label class="m-n">Transmission Type</label>
+
+					                    <input type="text" readonly="" value="{{details.transmission_type.car_transmission}}">
+					                </div>
+
+									<div class="field quarter">
+					                    <label class="m-n">Engine Displacement</label>
+
+					                    <input type="text" readonly="" value="{{details.engine_displacement}}">
+					                </div>
+
+					                <div class="field quarter">
+					                    <label class="m-n">Car Color</label>
+
+					                    <input type="text" readonly="" value="{{details.car_color}}">
+					                </div>
+
+					                <div class="field quarter">
+					                    <label class="m-n">Number of seats</label>
+
+					                    <input type="text" readonly="" value="4">
+					                </div>
+
+					                <div class="field quarter">
+					                    <label class="m-n">Doors</label>
+
+					                    <input type="text" readonly="" value="2/3">
+					                </div>
+
+					                <div class="field quarter">
+					                    <label class="m-n">Color</label>
+
+					                    <input type="text" readonly="" value="black">
+					                </div>
+								</div>
+							</form>
+
+							<div class="container-fluid">
+								<div class="row">
+									<div class="col-md-3">
+										<h3>Contact Details</h3>
+
+										<ul class="alt">
+											<li><span class="fa fa-user"></span> {{details.owner_name}}</li>
+											<li><span class="fa fa-phone"></span> +91 {{details.phone_number}} </li>
+											<li><span class="fa fa-envelope-o"></span> <a href="#">{{details.email}}</a></li>
+
+										</ul>
+									</div>
+
+									<div class="col-md-9">
+										<h3>CAR DESCRIPTION </h3>
+
+										<p>{{details.description}}</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<div class="inner">
+							<section>
+								<ul class="icons">
+									<li><a href="#" class="icon style2 fa-twitter"><span class="label">Twitter</span></a></li>
+									<li><a href="#" class="icon style2 fa-facebook"><span class="label">Facebook</span></a></li>
+									<li><a href="#" class="icon style2 fa-instagram"><span class="label">Instagram</span></a></li>
+									<li><a href="#" class="icon style2 fa-linkedin"><span class="label">LinkedIn</span></a></li>
+								</ul>
+
+								&nbsp;
+							</section>
+
+							<ul class="copyright">
+								<li>Copyright © 2020 Company Name </li>
+								<li>Template by: <a href="https://www.phpjabbers.com/">PHPJabbers.com</a></li>
+							</ul>
+						</div>
+					</footer>
+
+			</div>
+
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %} Search Results {% endblock %}
+{% block page_content %}
+<div class="container">
+{% if submitbutton == 'Search' and request.GET.q != '' %}
+  {% if results %}
+    <h1>Search results for <b>{{ request.GET.q }}</b></h1>
+    <br/><br/>
+
+    {% for result in results %}
+    <div class="col-md-4" style="width: 18rem;">
+      <img class="card-img-top" src="{{result.car_image.url}}" alt="Card image cap">
+      <div class="card-body">
+        <h2><a href="{% url 'car-details' result.pk%}">{{ result.car_brand }}</a></h2>
+        <hr>
+        <small>{{ result.car_model }} | {{result.production_year}}</small>
+      </div>
+    </div>
+    {% endfor %}
+
+    {% else %}
+
+    No search results for this query
+  {% endif %}
+{% else %}
+    <h2>There is nothing to search</h2>
+{% endif %}
+    <a href="{% url 'cars' %}">Go Back to Home page</a>
+</div>
+{% endblock %}

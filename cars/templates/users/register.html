@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %} Register {% endblock %}
+{% block page_content %}
+<div class="container">
+<h2>Register</h2>
+
+<form method="post">
+    {% csrf_token %}
+    {% for field in registration_form %}
+      <table>
+        {{field.label_tag}}
+        {{field}}
+
+      </table>
+
+      {% for error in field.errors %}
+        <p>{{ error}}</p>
+        {% endfor %}
+    {% endfor %}
+    <input type="submit" value="Register">
+</form>
+</div>
+{% endblock %}

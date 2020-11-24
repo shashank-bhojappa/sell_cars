@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load static %}
+{% block page_content %}
+<h1>Car Listings</h1>
+<div class="row">
+
+{% for car in list_all %}
+
+<div class="col-md-4" style="width: 18rem;">
+  <img class="card-img-top" src="{{car.car_image.url}}">
+  <div class="card-body">
+    <h2><a href="{% url 'car_details' car.pk%}">{{ car.car_brand }}</a></h2>
+    <h3>${{car.price}}</h3>
+    <hr>
+    <small>{{ car.car_model }} | {{car.production_year}}</small>
+    {% if user.is_authenticated %}
+      {% if car.owner_name == request.user %}
+      <p><a href="{% url 'update_details' car.pk %}">Edit</a> | <a href="{% url 'delete_car' car.pk %}">Delete</a></p>
+      {% endif %}
+    {% endif %}
+
+
+  </div>
+</div>
+
+{% endfor %}
+</div>
+{% if list_all.has_previous %}
+<p>
+<a href="{% url 'cars' %}?page={{list_all.previous_page_number}}">Previous Page</a>
+ |
+{% endif %}
+{% if list_all.has_next %}
+<a href="{% url 'cars' %}?page={{list_all.next_page_number}}">Next Page</a>
+{% endif %}
+</p>
+{% endblock %}
