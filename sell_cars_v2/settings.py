@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+import django_heroku
+import dj_database_url
+from decouple import config
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -52,6 +55,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'social_django.middleware.SocialAuthExceptionMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'sell_cars_v2.urls'
@@ -141,6 +145,8 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR,'static')
 ]
 
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 LOGIN_REDIRECT_URL = 'cars'
 LOGOUT_REDIRECT_URL = 'cars'
 
@@ -159,7 +165,7 @@ EMAIL_USE_TLS = False
 #In actual production
 #EMAIL_HOST = "smtp.gmail.com"
 #EMAIL_PORT = 587
-#EMAIL_HOST_USER = 'shashank.bhojappa1989@gmail.com'
+#EMAIL_HOST_USER = 's***********@gmail.com'
 #EMAIL_HOST_PASSWORD = '*******'
 #EMAIL_USE_TLS = True
 #EMAIL_USE_SSL = False
@@ -169,3 +175,5 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '3vkLbp3DJu6LvbjbUJOk1hjw'
 
 SOCIAL_AUTH_GITHUB_KEY = '51ae4c7ab47c5015ef14'
 SOCIAL_AUTH_GITHUB_SECRET = '356e7b5b31e51b95d9c92e4022941196dd3c495a'
+
+django_heroku.settings(locals())
