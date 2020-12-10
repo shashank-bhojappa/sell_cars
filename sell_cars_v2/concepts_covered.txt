@@ -7,4 +7,5 @@
 7. View Restrictions/Authorization using LoginReguired decoreators
 8. Custom User Registraion Form
 9. Form
-10. Pagination
+10.Pagination
+11. Social Authentication
